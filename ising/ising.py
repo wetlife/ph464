@@ -11,13 +11,13 @@ def indexPicker(dimension):
 	'randomly pick a single index'
 	return round((dimension-1)*np.random.rand())
 
-def val(i,j):
+def val(i,j,array=microstate):
     'implements cyclic boundary conditions on lattice'
-    return microstate[i%latticeSize,j%latticeSize]
+    return array[i%latticeSize,j%latticeSize]
 
 def siteEnergy(i,j,siteValue):
     'calculate energy of site (i,j) when site has value siteValue'
-    return H[i%latticeSize,j%latticeSize]*val(i,j) + J*siteValue*(val(i-1,j) + val(i+1,j) + val(i,j-1) + val(i,j+1))
+    return val(i,j,H)*val(i,j) + J*siteValue*(val(i+1,j) + val(i,j+1))
 
 def localEnergy(i,j,siteValue):
     'calculate energy of (i,j) site and nearest neighbors'
