@@ -1,70 +1,80 @@
 from __future__ import division
-from numpy import ones zeros
+from numpy import ones,zeros,exp
 from numpy.random import random
 import matplotlib.pyplot as plt
 
-latticeSize = 3 # number of sites in a row or column of the lattice
-H = np.zeros((latticeSize,latticeSize)) # magnetic field
-J = 1 # strength of neighbor-interactions
-microstate = np.ones((latticeSize,latticeSize), int) # initial lattice state
-beta = 1/T # 1/(K_B T)
+latticeSize     = 10 # number of sites in a row or column of the lattice
+H               = zeros((latticeSize,latticeSize)) # magnetic field
+J               = 1 # strength of neighbor-interactions
+microstate      = ones((latticeSize,latticeSize), int) # initial lattice state
+T               = 1 # temperature, units depend on kb
+kb              = 1 # Boltzmann's constant
+beta            = 1/(kb*T) # 1/(kb T)
 
 def indexPicker(size):
     'randomly pick a single index'
-    return round((size-1)*random())
+    return round((size)*random())
 
 def val(i,j,array=microstate):
     'implements cyclic boundary conditions on lattice'
     return array[i%latticeSize,j%latticeSize]
 
-def siteEnergy(i,j,siteValue=val(i,j)):
+def siteEnergy(i,j,siteValue=False):
     'calculate energy of site (i,j) when site has value siteValue'
-    return val(i,j,H)*val(i,j) + J*siteValue*(val(i+1,j) + val(i,j+1))
+    if not siteValue: siteValue = val(i,j)
+    return (val(i,j,H) + J*(val(i+1,j) + val(i,j+1)))*siteValue
 
-#def localEnergy(i,j,siteValue):
-#    'calculate energy of (i,j) site and nearest neighbors'
-#    returnEnergy = 0
-#    for iAndNeighbors in range(i-1,i+2):
-#        for jAndNeighbors in range(j-1,j+2):
-#            returnEnergy = returnEnergy + siteEnergy(iAndNeighbors,jAndNeighbors,val(iAndNeighbors,jAndNeighbors))
-#    return returnEnergy
-
-def totalEnergy(flipPosition=False): # takes argument of form [siteValue,i,j]
+def totalEnergy(flipValue=False,i=False,j=False): # calc. latt. NRG w/a flipped val.
     'return total energy of lattice'
     returnEnergy = 0;
     for i in range(latticeSize):
         for j in range(latticeSize):
             returnEnergy = returnEnergy + siteEnergy(i,j)
-    if flipPosition:
-        returnEnergy = returnEnergy - siteEnergy(i,j) + siteEnergy(i,j,-1*val(i,j)
+    if flipValue:
+        returnEnergy = returnEnergy - siteEnergy(i,j) + siteEnergy(i,j,-1*val(i,j))
     return returnEnergy
 
-def totalEnergyDifference():
-totalEnergyDifference = 1
-    
-print totalEnergy()
+def totalEnergyDifference(i,j):
+    return totalEnergy()-totalEnergy(True,i,j)
 
-#plt.imshow(microstate)
-#plt.show()
+#def siteEnergyDifference(i,j):
+#    returnEnergyDifference = 0
+#    for i in [i-1,i]:
+#        for j in [j-1,j]:
+#            returnEnergyDifference += siteEnergy(i,j)-siteEnergy(i,j,-1*val(i,j))
+#    return returnEnergyDifference
 
-## iterate metropolis algorithm
-metropolizations = range(latticeSize**2) # number of times to do metropolis alg
-for metropolisIterationIndex in metropolizations:
-    i = indexPicker(latticeSize));
-    j = indexPicker(latticeSize));
-    siteValue = val(i,j)
-    
-    print 'Metropolization ', n, ': (', i, ',', j, ')', val(i,j)
-    if siteEnergy(i,j,-1*val(i,j)) <= siteEnergy(i,j)
-        microstate[i,j] = -1*val(i,j)
+### iterate metropolis algorithm
+metropolizations = latticeSize**2 # number of times to metropolize
+for metropolisIterationIndex in range(metropolizations):
+    metropolisIterationIndex += 1
+    i = indexPicker(latticeSize)
+    j = indexPicker(latticeSize)
+   
+    if metropolisIterationIndex%10==0:
+        print 'Metropolization ', metropolisIterationIndex, ': (', i, ',', j, ')', val(i,j)
+        print "Current energy of microstate is ", totalEnergy()
+    if siteEnergy(i,j,-1*val(i,j)) <= siteEnergy(i,j):
+        microstate[i%latticeSize,j%latticeSize] = -1*val(i,j)
         continue
-    elif siteEnergy(i,j,-1*siteValue) - siteEnergy(i,j,siteValue)) < -T*math.log(random.rand:
-        microstate[i,j] = -1*val(i,j)
+    elif random()<exp(-1*abs(siteEnergy(i,j,-1*val(i,j)) - siteEnergy(i,j))/(kb*T)):
+        microstate[i%latticeSize,j%latticeSize] = -1*val(i,j)
         continue
+    else:
+        continue
+
+#for i in range(latticeSize):
+#    for f in range(latticeSize):
+#        if totalEnergyDifference(i,j) != siteEnergyDifference(i,j):
+#            print "ENERGY DIFFERENCES NOT EQUIVALENT!!!!!!"
+#            print (i,j)
+#        else: print "xxxxxxSUCCESSxxxxxx"
+
+plt.imshow(microstate,interpolation='none')
+plt.show()
 
         ### TODO:   
-#                   Finish metropolis algorithm
-#                   Does site energy difference == total energy differwnce?
-#                   Finish metropolis algorithm
-#                   Test metropolis algorithm
+#xxxxxxxxxxxxxxxxxxxFinish metropolis algorithm
+#    FAIL           Does site energy difference == total energy difference?
+#xxxxxxxxxxxxxxxxxxxTest metropolis algorithm
 #                   Plot metropolized microstate total energy vs. T
