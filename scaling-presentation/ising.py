@@ -51,7 +51,7 @@ def metropolizer( ):
         i = indexPicker(latticeSize)
         j = indexPicker(latticeSize)
 
-        deltaEnergy = totalEnergyDifference(i,j)
+        deltaEnergy = localEnergyDifference(i,j)
         if deltaEnergy <= 0:
             microstate[i%latticeSize,j%latticeSize] = -1*val(i,j)
         elif np.random.random()<np.exp(-deltaEnergy/(kb*T)):
