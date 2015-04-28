@@ -1,0 +1,78 @@
+/usr/bin/time -f '%e' python ising.py 1
+/usr/bin/time -f '%e' python ising.py 2
+/usr/bin/time -f '%e' python ising.py 3
+/usr/bin/time -f '%e' python ising.py 4
+/usr/bin/time -f '%e' python ising.py 5
+/usr/bin/time -f '%e' python ising.py 6
+/usr/bin/time -f '%e' python ising.py 7
+/usr/bin/time -f '%e' python ising.py 8
+/usr/bin/time -f '%e' python ising.py 9
+/usr/bin/time -f '%e' python ising.py 10
+/usr/bin/time -f '%e' python ising.py 11
+/usr/bin/time -f '%e' python ising.py 12
+/usr/bin/time -f '%e' python ising.py 13
+/usr/bin/time -f '%e' python ising.py 14
+/usr/bin/time -f '%e' python ising.py 15
+/usr/bin/time -f '%e' python ising.py 16
+/usr/bin/time -f '%e' python ising.py 17
+/usr/bin/time -f '%e' python ising.py 18
+/usr/bin/time -f '%e' python ising.py 19
+/usr/bin/time -f '%e' python ising.py 20
+/usr/bin/time -f '%e' python ising.py 21
+/usr/bin/time -f '%e' python ising.py 22
+/usr/bin/time -f '%e' python ising.py 23
+/usr/bin/time -f '%e' python ising.py 24
+/usr/bin/time -f '%e' python ising.py 25
+/usr/bin/time -f '%e' python ising.py 26
+/usr/bin/time -f '%e' python ising.py 27
+/usr/bin/time -f '%e' python ising.py 28
+/usr/bin/time -f '%e' python ising.py 29
+/usr/bin/time -f '%e' python ising.py 30
+/usr/bin/time -f '%e' python ising.py 31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/usr/bin/time -f '%e' python ising.py {1..100}

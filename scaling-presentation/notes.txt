@@ -1,4 +1,6 @@
-scaling of problems:
+       scaling of problems:
+
+discussion:
 -computer is incredibly powerful as an abacus replacement
 -A computer's computations appear to be 'free' to a user because it requires none of the blood, sweat, or tears of a human's computations. 
 -However, there some nonzero amount of time required for each computation as well as some nonzero amount of storage for, e.g. for intermediate computations 
