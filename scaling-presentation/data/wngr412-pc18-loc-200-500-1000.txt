@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "isingLocalEnergyDifference.py", line 6, in <module>
+    latticeSize = int(sys.argv[1]) # number of sites in a row or column of the lattice
+ValueError: invalid literal for int() with base 10: '{200'
+Command exited with non-zero status 1
+0.74
+622.45
+Traceback (most recent call last):
+  File "isingLocalEnergyDifference.py", line 6, in <module>
+    latticeSize = int(sys.argv[1]) # number of sites in a row or column of the lattice
+ValueError: invalid literal for int() with base 10: '1000}'
+Command exited with non-zero status 1
+0.49
