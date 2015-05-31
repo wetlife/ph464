@@ -13,15 +13,11 @@ dPosition = .01
 pOld = np.zeros_like(room)
 pMoreOld = np.zeros_like(room)
 
-for timeStep in range(0,latestTime,dt)
+for timeStep in range(0,latestTime,dt):
     for m in range(size):
 	    for n in range(size):
                 # calculate the p-value at each position 
-		# use 2d version of centered verlet's
-		p[n][m] = 
-
-
-
+	        # use 2d version of centered verlet's
+                p[n][m] = "FILL IN DIFF-EQ"
     plt.imshow( room, interpolation='none')
     plt.show()
-
