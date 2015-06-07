@@ -2,9 +2,8 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-#import pylab
 
-c = 300 # m/s
+a = 300 # m/s
 size = 20 # m
 latestTime = 90 # max t-value in seconds
 dt = 0.1 # step in seconds
@@ -32,6 +31,5 @@ for timeStep in range(0,latestTime):
                         *( p(1,n+1,m) +p(1,n-1,m) +p(1,n,m+1) +p(1,n,m-1) \
                         -4*p(1,n,m) )
     plt.imshow( pArray[2], interpolation='none')
+    plt.legend()
     plt.show()
-    #input('paused for debugging')
-    time.sleep(1)

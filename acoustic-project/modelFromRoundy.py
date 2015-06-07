@@ -16,11 +16,14 @@ dx = dy = .01 # dPosition = dx = dy; positions are in a squared-lattice
 pArray = np.zeros((3,size,size)) # p(T,N,M); matrices of room's pressure at times t-dt, t, and t+dt stored in a 3D array s.t. p[0]=pOldMatrix, p[1]=pMatrix, and p[2]=pNewMatrix
 percentageChanceOfImpulse = 10
 cyclesPerFrame = 3
+impulseFrequency = 
 
 def p(timeStep,n,m):
     '''accesses matrices and enforces boundary conditions on them'''
     if n<=0 or m<=0 or n>=size or m>=size:
         return 0
+    # diffracting boundary conditions below
+    elif n < notchDepth and m in 
     else:
         return pArray[timeStep][n][m]
 
